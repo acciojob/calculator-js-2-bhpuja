@@ -1,15 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
-    <title>Calculator</title>
-  </head>
-  <body>
-    <!-- Write yout code here -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+    }
+    .calculator {
+      display: inline-block;
+      border: 2px solid #333;
+      padding: 20px;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+    }
+    #display {
+      width: 100%;
+      height: 40px;
+      text-align: right;
+      margin-bottom: 15px;
+      font-size: 1.2em;
+      padding: 5px;
+      border: 1px solid #333;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    .button {
+      padding: 15px;
+      font-size: 1.1em;
+      cursor: pointer;
+      border: 1px solid #333;
+      border-radius: 5px;
+      background-color: #e0e0e0;
+    }
+    .button:hover {
+      background-color: #d0d0d0;
+    }
+    .button.operation {
+      background-color: #ffa07a;
+    }
+    .button.operation:hover {
+      background-color: #ff8c69;
+    }
+  </style>
+</head>
+<body>
 
-    <script src="script.js"></script>
-  </body>
+  <h1>Calculator</h1>
+  <div class="calculator">
+    <!-- Display Area -->
+    <input type="text" id="display" readonly data-ns-test="display">
+
+    <!-- Buttons -->
+    <div class="button-grid">
+      <!-- Number Buttons -->
+      <button class="button" id="7" onclick="appendValue('7')">7</button>
+      <button class="button" id="8" onclick="appendValue('8')">8</button>
+      <button class="button" id="9" onclick="appendValue('9')">9</button>
+      <button class="button operation" id="divi" onclick="appendValue('/')">/</button>
+
+      <button class="button" id="4" onclick="appendValue('4')">4</button>
+      <button class="button" id="5" onclick="appendValue('5')">5</button>
+      <button class="button" id="6" onclick="appendValue('6')">6</button>
+      <button class="button operation" id="*" onclick="appendValue('*')">*</button>
+
+      <button class="button" id="1" onclick="appendValue('1')">1</button>
+      <button class="button" id="2" onclick="appendValue('2')">2</button>
+      <button class="button" id="3" onclick="appendValue('3')">3</button>
+      <button class="button operation" id="minus" onclick="appendValue('-')">-</button>
+
+      <button class="button" id="0" onclick="appendValue('0')">0</button>
+      <button class="button operation" id="op" onclick="appendValue('(')">(</button>
+      <button class="button operation" id="cl" onclick="appendValue(')')">)</button>
+      <button class="button operation" id="plus" onclick="appendValue('+')">+</button>
+
+      <!-- Clear, Backspace, Equals -->
+      <button class="button operation" id="C" onclick="clearDisplay()">C</button>
+      <button class="button operation" id="back" onclick="deleteLast()">←</button>
+      <button class="button operation" id="equal" onclick="calculateResult()">=</button>
+    </div>
+  </div>
+
+  <script>
+    // Display element
+    const display = document.getElementById('display');
+
+    // Append value to the display
+    function appendValue(value) {
+      display.value += value;
+    }
+
+    // Clear the display
+    function clearDisplay() {
+      display.value = '';
+    }
+
+    // Delete the last character
+    function deleteLast() {
+      display.value = display.value.slice(0, -1);
+    }
+
+    // Calculate the result
+    function calculateResult() {
+      try {
+        // Evaluate the expression and update the display
+        display.value = eval(display.value);
+      } catch (error) {
+        display.value = 'Error';
+      }
+    }
+  </script>
+
+</body>
 </html>
